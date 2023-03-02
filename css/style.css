@@ -73,6 +73,30 @@ html,body{
   border-color: #000;
 }
 
+/* Alerta */
+
+.alert{
+  border-radius: 0;
+  text-align: center;
+  margin-bottom: 0;
+  font-weight: bold;
+  padding: 20px;
+  font-size: 18px;
+  background-color: #30c785;
+}
+
+.alert.alert-sucess{
+  border: 2px solid #155754;
+}
+
+.alert.alert-warning{
+  border: 2px solid #856404;
+}
+
+.alert p{
+  margin-bottom: 0px;
+}
+
 /* Footer */
 footer{
   position: relative;
