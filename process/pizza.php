@@ -26,6 +26,16 @@ if ($method === "GET") {
   $sabores = $data["sabores"];
 
   // Validações
+  $bordaQuery = $conn->prepare("SELECT id FROM bordas WHERE id = :borda");
+  $bordaQuery->bindParam(":borda", $borda, PDO::PARAM_INT);
+  $bordaQuery->execute();
+  if (!$bordaQuery->fetch()) {
+    $_SESSION["msg"] = "Borda inválida!";
+    $_SESSION["status"] = "warning";
+    header("Location: ..");
+    exit;
+  }
+
   if (count($sabores) > 3) {
     $_SESSION["msg"] = "Selecione no máximo 3 sabores!";
     $_SESSION["status"] = "warning";
