@@ -76,6 +76,18 @@ if ($method === "GET") {
 
     $_SESSION["msg"] = "Pedido Removido com Sucesso";
     $_SESSION["status"] = "success";
+    // Atualizar status do pedido
+  } else if ($type == "update") {
+    $pizzaId = $_POST['id'];
+    $statusId = $_POST["status"];
+
+    $updateQuery = $conn->prepare("UPDATE pedidos SET status_id = :status_id WHERE pizza_id = :pizza_id");
+    $updateQuery->bindParam(":pizza_id", $pizzaId, PDO::PARAM_INT);
+    $updateQuery->bindParam(":status_id", $statusId, PDO::PARAM_INT);
+    $updateQuery->execute();
+
+    $_SESSION["msg"] = "Pedido Atualizado com Sucesso";
+    $_SESSION["status"] = "success";
   }
 
   // Retorna usuario para dashboard
