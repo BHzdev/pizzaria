@@ -63,4 +63,21 @@ if ($method === "GET") {
   $statusQuery = $conn->query("SELECT * FROM status;");
   $status = $statusQuery->fetchAll();
 } else if ($method === "POST") {
+  // Verificando do tipo do POST
+  $type = $_POST["type"];
+
+  // Deletar pedido
+  if ($type === "delete") {
+    $pizzaId = $_POST['id'];
+
+    $deleteQuery = $conn->prepare("DELETE FROM pedidos WHERE pizza_id = :pizza_id;");
+    $deleteQuery->bindParam(":pizza_id", $pizzaId, PDO::PARAM_INT);
+    $deleteQuery->execute();
+
+    $_SESSION["msg"] = "Pedido Removido com Sucesso";
+    $_SESSION["status"] = "success";
+  }
+
+  // Retorna usuario para dashboard
+  header("Location: ../dashboard.php");
 }
