@@ -55,6 +55,12 @@ if ($method === "GET") {
       array_push($saboresDaPizza, $saborPizza["nome"]);
     }
     $pizza["sabores"] = $saboresDaPizza;
+    // Adicionar o status do pedido
+    $pizza["status"] = $pedido["status_id"];
+    // Adicionando o array de pizza ao array de pizzas
+    array_push($pizzas, $pizza);
   }
+  $statusQuery = $conn->query("SELECT * FROM status;");
+  $status = $statusQuery->fetchAll();
 } else if ($method === "POST") {
 }
